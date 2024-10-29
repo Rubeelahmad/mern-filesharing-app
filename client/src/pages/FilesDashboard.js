@@ -49,8 +49,21 @@ const FilesDashboard = () => {
     }
   };
 
+  // const handleFileChange = (e) => {
+  //   const selectedFile = e.target.files[0];
+  //   setFile(selectedFile);
+  //   previewFile(selectedFile);
+  // };
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
+    const maxFileSize = 20 * 1024 * 1024; // 20 MB limit
+  
+    if (selectedFile.size > maxFileSize) {
+      toast.error("File size exceeds the 20 MB limit.");
+      return;
+    }
+  
     setFile(selectedFile);
     previewFile(selectedFile);
   };
