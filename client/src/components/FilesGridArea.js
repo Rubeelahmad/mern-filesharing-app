@@ -12,9 +12,40 @@ import { incrementFileView } from '../services/api';
 const FilesGridArea = ({ files }) => {
   const navigate = useNavigate();
 
+  // const handleCopyLink = (url) => {
+  //   navigator.clipboard.writeText(url);
+  //   toast.info("Link Copied successfully!");
+  // };
+
   const handleCopyLink = (url) => {
-    navigator.clipboard.writeText(url);
-    toast.info("Link Copied successfully!");
+    console.log("Copying link:", url);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => {
+        toast.info("Link copied successfully!");
+      }).catch((error) => {
+        console.error('Clipboard API error:', error);
+        fallbackCopyToClipboard(url);
+      });
+    } else {
+      fallbackCopyToClipboard(url);
+    }
+  };
+  
+  const fallbackCopyToClipboard = (text) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed"; // Avoid scrolling to bottom
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      toast.info("Link copied successfully!");
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+      toast.error("Could not copy the link. Please try again.");
+    }
+    document.body.removeChild(textArea);
   };
 
   const handleViewStatistics = (fileId) => {
