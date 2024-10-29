@@ -10,7 +10,7 @@ connectDB();
 
 
 app.use(cors({
-    origin: 'http://localhost:3000', 
+    origin: 'http://157.230.99.54', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
 }));

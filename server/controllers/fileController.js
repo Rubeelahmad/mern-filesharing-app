@@ -18,7 +18,7 @@ const uploadFile = async (req, res) => {
       filename: file.filename,
       filetype: file.mimetype,
       filesize: file.size,
-      fileUrl: `http://localhost:${process.env.PORT}/uploads/${file.filename}`,   
+      fileUrl: `http://157.230.99.54:5000/uploads/${file.filename}`,   
       user: req.user._id,
       views: 0, // Initialize views count to 0
       createdAt: new Date(), // Set creation date

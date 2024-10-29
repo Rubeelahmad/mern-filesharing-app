@@ -1,18 +1,4 @@
-// const mongoose = require('mongoose');
 
-// const FileSchema = new mongoose.Schema({
-//   filename: String,
-//   filetype: String,
-//   filesize: Number,
-//   fileUrl: String,
-//   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-// });
-
-// module.exports = mongoose.model('File', FileSchema);
-
-
-
-// models/File.js
 const mongoose = require('mongoose');
 
 const fileSchema = new mongoose.Schema({
