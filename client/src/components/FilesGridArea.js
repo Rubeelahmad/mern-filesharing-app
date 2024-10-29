@@ -12,11 +12,6 @@ import { incrementFileView } from '../services/api';
 const FilesGridArea = ({ files }) => {
   const navigate = useNavigate();
 
-  // const handleCopyLink = (url) => {
-  //   navigator.clipboard.writeText(url);
-  //   toast.info("Link Copied successfully!");
-  // };
-
   const handleCopyLink = (url) => {
     console.log("Copying link:", url);
     if (navigator.clipboard) {
