@@ -45,21 +45,23 @@ const getFiles = async (req, res) => {
 };
 
 // Increment views when file is accessed directly
-const incrementFileViews = async (req, res, next) => {
-  const { file } = req.params;
+// const incrementFileViews = async (req, res, next) => {
+//   const { file } = req.params;
 
-  try {
-    const fileRecord = await File.findOne({ filename: file });
-    if (fileRecord) {
-      fileRecord.views += 1;
-      await fileRecord.save();
-    }
-    next();
-  } catch (error) {
-    console.error('Error incrementing view count:', error);
-    next();
-  }
-};
+//   try {
+//     const fileRecord = await File.findOne({ filename: file });
+//     if (fileRecord) {
+//       fileRecord.views += 1;
+//       await fileRecord.save();
+//     }
+//     next();
+//   } catch (error) {
+//     console.error('Error incrementing view count:', error);
+//     next();
+//   }
+// };
+
+
 
 // Increment view count on file click in the application
 const getFileViews = async (req, res) => {
@@ -128,5 +130,5 @@ module.exports = {
   getFileViews,
   getFileStatisticsById,
   getAllFilesStatistics,
-  incrementFileViews,
+  //incrementFileViews,
 };

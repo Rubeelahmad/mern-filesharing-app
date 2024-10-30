@@ -26,8 +26,6 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import { incrementFileView } from '../services/api';
-
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 // Helper function to generate a video thumbnail at 2 seconds
@@ -123,8 +121,8 @@ const SortableFileItem = ({
       <p className="text-sm text-gray-500">Size: {fileSize}</p>
       <p className="text-sm text-gray-500">Views: {file.views}</p>
       <button
-       // onClick={() => handleCopyLink(file._id)}
-       onClick={() => handleCopyLink(file._id, file.filename)}
+       onClick={() => handleCopyLink(file.fileUrl)}
+       //onClick={() => handleCopyLink(file._id, file.filename)}
         className="text-blue-500 hover:text-blue-700 underline mt-2"
       >
         Copy Link
@@ -166,34 +164,36 @@ const FilesGridArea = ({ files: initialFiles = [] }) => {
 
 
 
-  // const handleCopyLink = (url) => {
-  //   if (navigator.clipboard) {
-  //     navigator.clipboard
-  //       .writeText(url)
-  //       .then(() => toast.info("Link copied successfully!"))
-  //       .catch((error) => {
-  //         console.error("Clipboard API error:", error);
-  //         fallbackCopyToClipboard(url);
-  //       });
-  //   } else {
-  //     fallbackCopyToClipboard(url);
-  //   }
-  // };
-
-  const handleCopyLink = (fileId, fileName) => {
-    const redirectLink = `http://localhost:3000/redirect/${fileId}.${fileName}`; 
+  const handleCopyLink = (url) => {
+        //http://localhost:5000/uploads/${file.filename}?view=true
+    const updatedUrl = `${url}?view=true`
     if (navigator.clipboard) {
       navigator.clipboard
-        .writeText(redirectLink)
+        .writeText(updatedUrl)
         .then(() => toast.info("Link copied successfully!"))
         .catch((error) => {
           console.error("Clipboard API error:", error);
-          fallbackCopyToClipboard(redirectLink);
+          fallbackCopyToClipboard(updatedUrl);
         });
     } else {
-      fallbackCopyToClipboard(redirectLink);
+      fallbackCopyToClipboard(updatedUrl);
     }
   };
+
+  // const handleCopyLink = (fileId, fileName) => {
+  //   const redirectLink = `http://localhost:3000/shareable/${fileId}.${fileName}`; 
+  //   if (navigator.clipboard) {
+  //     navigator.clipboard
+  //       .writeText(redirectLink)
+  //       .then(() => toast.info("Link copied successfully!"))
+  //       .catch((error) => {
+  //         console.error("Clipboard API error:", error);
+  //         fallbackCopyToClipboard(redirectLink);
+  //       });
+  //   } else {
+  //     fallbackCopyToClipboard(redirectLink);
+  //   }
+  // };
   
   const fallbackCopyToClipboard = (text) => {
     const textArea = document.createElement("textarea");
@@ -218,9 +218,10 @@ const FilesGridArea = ({ files: initialFiles = [] }) => {
 
   const handleFileClick = async (fileId, fileUrl) => {
     try {
-      await incrementFileView(fileId);
-      window.open(fileUrl, "_blank", "noopener,noreferrer");
-     // await axios.get(`/api/files/file/${file._id}/view`); // API call to increment view count
+    //  await incrementFileView(fileId);
+    //http://localhost:5000/uploads/${file.filename}?view=true
+    const updatedUrl = `${fileUrl}?view=true`
+      window.open(updatedUrl, "_blank", "noopener,noreferrer");
 
       // Optional: Update the file’s view count in the UI without reloading
       setFiles((prevFiles) =>

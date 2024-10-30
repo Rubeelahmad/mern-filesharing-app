@@ -22,9 +22,6 @@ router.get('/file/:id/view', authMiddleware, getFileViews);
 router.get('/file/:id/statistics', authMiddleware, getFileStatisticsById);
 router.get('/statistics', authMiddleware, getAllFilesStatistics);
 
-// Increment view count for direct file access
-router.use('/uploads/:file', incrementFileViews);
-
 module.exports = router;
 
 
