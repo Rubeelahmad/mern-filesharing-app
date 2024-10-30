@@ -4,6 +4,7 @@ import {
   Routes,
 } from 'react-router-dom';
 
+import FileRedirect from './components/FileRedirect';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { useAuth } from './context/authContext';
@@ -24,6 +25,8 @@ function App() {
           {/* Public Routes */}
           <Route path="/login" element={!token ? <Login /> : <Navigate to="/filesdashboard" />} />
           <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/filesdashboard" />} />
+          <Route path="/redirect/:fileIdAndName" element={<FileRedirect />} />
+
 
           {/* Protected Routes */}
           <Route path="/filesdashboard" element={token ? <FilesDashboard /> : <Navigate to="/login" />} />
