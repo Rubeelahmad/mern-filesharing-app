@@ -165,7 +165,6 @@ const FilesGridArea = ({ files: initialFiles = [] }) => {
 
 
   const handleCopyLink = (url) => {
-        //http://localhost:5000/uploads/${file.filename}?view=true
     const updatedUrl = `${url}?view=true`
     if (navigator.clipboard) {
       navigator.clipboard
@@ -218,9 +217,8 @@ const FilesGridArea = ({ files: initialFiles = [] }) => {
 
   const handleFileClick = async (fileId, fileUrl) => {
     try {
-    //  await incrementFileView(fileId);
-    //http://localhost:5000/uploads/${file.filename}?view=true
-    const updatedUrl = `${fileUrl}?view=true`
+
+      const updatedUrl = `${fileUrl}?view=true`
       window.open(updatedUrl, "_blank", "noopener,noreferrer");
 
       // Optional: Update the file’s view count in the UI without reloading

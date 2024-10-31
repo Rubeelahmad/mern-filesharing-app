@@ -23,7 +23,7 @@ const uploadFile = async (req, res) => {
       filename: file.filename,
       filetype: file.mimetype,
       filesize: file.size,
-      fileUrl: `http://localhost:5000/uploads/${file.filename}`,
+      fileUrl: `${process.env.API_URI}/uploads/${file.filename}`,
       user: req.user._id,
       views: 0,
       createdAt: new Date(),
